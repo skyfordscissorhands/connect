@@ -98,8 +98,14 @@
     }
 
     button:hover {
-      background: linear-gradient(90deg, var(--ai-blue), var(--ai-green));
-      transform: translateY(-1px);
+      background: var(--ai-green);
+  color: white;
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--ai-green), var(--ai-green)), 
+                    linear-gradient(90deg, var(--ai-blue), var(--ai-green));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  transform: translateY(-1px);
     }
 
     .slide-up {
