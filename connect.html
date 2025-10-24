@@ -1,1 +1,199 @@
-<h1>testing</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Let’s Connect | Associated Industries</title>
+
+  <!-- Fonts -->
+  <style>
+    @font-face {
+      font-family: "Qaranta";
+      src: url("/assets/Qaranta-Bold.woff2") format("woff2"),
+           url("/assets/Qaranta-Bold.woff") format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    :root {
+      --ai-blue: #0073E5;
+      --ai-green: #22C55E;
+      --ai-light: #E1F1FD;
+      --ai-ink: #15182F;
+      --ai-deep: #2F6F4E;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      background: linear-gradient(160deg, var(--ai-light) 0%, #fff 100%);
+      color: var(--ai-ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--ai-light);
+      border-radius: 24px;
+      box-shadow: 0 12px 24px rgba(0, 115, 229, 0.2);
+      padding: 36px;
+      text-align: center;
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: "Qaranta", sans-serif;
+      font-weight: 700;
+      color: var(--ai-blue);
+      font-size: 2rem;
+      margin: 0 0 8px;
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: var(--ai-ink);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #cfd8e3;
+      border-radius: 10px;
+      font-family: "Open Sans", sans-serif;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--ai-blue);
+      box-shadow: 0 0 0 3px rgba(0, 115, 229, 0.12);
+    }
+
+    button {
+      width: 100%;
+      background: var(--ai-blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 12px;
+      font-weight: 600;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, var(--ai-blue), var(--ai-green));
+      transform: translateY(-1px);
+    }
+
+    .slide-up {
+      transform: translateY(-110%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #saveStep {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(10%);
+      transition: all 0.6s ease;
+    }
+
+    #saveStep.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tick {
+      background: var(--ai-green);
+      color: white;
+      font-weight: 700;
+      font-size: 22px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      box-shadow: 0 6px 12px rgba(34, 197, 94, 0.3);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <h1>Let’s Connect</h1>
+    <p>Share your info below to receive our contact instantly.</p>
+
+    <!-- Stage 1: Form -->
+    <form id="connectForm" action="">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="tel" name="phone" placeholder="Your Phone">
+      <input type="text" name="company" placeholder="Your Company">
+      <button type="submit">Connect</button>
+    </form>
+
+    <!-- Stage 2: Save step -->
+    <div id="saveStep">
+      <div class="tick">✓</div>
+      <h2 style="font:700 1.4rem 'Open Sans';color:var(--ai-ink);margin:10px 0;">Thanks for connecting!</h2>
+      <p>My contact card is ready for you to save.</p>
+      <button id="saveContact">Save My Contact</button>
+    </div>
+
+    <div class="footer">
+      Soil & Groundwater Professionals<br>
+      Associated Industries Group
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("connectForm");
+    const saveStep = document.getElementById("saveStep");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      // Simulated success for now
+      form.classList.add("slide-up");
+      saveStep.classList.add("show");
+    });
+
+    document.getElementById("saveContact").addEventListener("click", () => {
+      window.open("https://associatedindustriesgroup.com/robert.vcf", "_blank");
+      setTimeout(() => {
+        window.location.href = "https://associatedindustriesgroup.com";
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
+
