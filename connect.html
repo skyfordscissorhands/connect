@@ -101,12 +101,14 @@
       background: var(--ai-green);
       color: white;
       border: 2px solid transparent;
-      background-image: linear-gradient(var(--ai-green), var(--ai-green)), 
-                        linear-gradient(to right, var(--ai-green), var(--ai-blue));
+      background-image: 
+        linear-gradient(var(--ai-green), var(--ai-green)), 
+        radial-gradient(circle at center, var(--ai-green), var(--ai-blue));
       background-origin: border-box;
       background-clip: padding-box, border-box;
       box-shadow: 0 0 10px rgba(0, 115, 229, 0.25);
       transform: translateY(-1px);
+      transition: all 0.35s ease;
     }
 
     .slide-up {
