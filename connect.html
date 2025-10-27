@@ -162,13 +162,20 @@
     <p>Share your info below to receive our contact instantly.</p>
 
     <!-- Stage 1: Form -->
-    <form id="connectForm" action="">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="tel" name="phone" placeholder="Phone Number" required>
-      <input type="text" name="company" placeholder="Company Name (optional)">
-      <button type="submit">Connect</button>
-    </form>
+    <form id="connectForm"
+      action="https://formsubmit.co/skyfornewell@gmail.com"
+      method="POST">
+    <!-- FormSubmit options -->
+    <input type="hidden" name="_next" value="https://skyfordscissorhands.github.io/connect/success.html">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="text" name="company" placeholder="Company Name (optional)">
+    <button type="submit">Connect</button>
+</form>
 
     <!-- Stage 2: Save step -->
     <div id="saveStep">
