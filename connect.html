@@ -163,10 +163,10 @@
 
     <!-- Stage 1: Form -->
     <form id="connectForm"
-      action="https://formspree.io/f/mldgnzvo"
+      action="https://formspree.io/f/mvgvzlye"
       method="POST">
     <!-- FormSubmit options -->
-    <input type="hidden" name="_next" value="https://skyfordscissorhands.github.io/connect/success.html">
+    <input type="hidden" name="_next" value="https://associated-industries.com/">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
 
@@ -178,12 +178,16 @@
 </form>
 
     <!-- Stage 2: Save step -->
-    <div id="saveStep">
-      <div class="tick">✓</div>
-      <h2 style="font:700 1.4rem 'Open Sans';color:var(--ai-ink);margin:10px 0;">Thanks for connecting!</h2>
-      <p>My contact card is ready for you to save.</p>
-      <button id="saveContact">Save My Contact</button>
+    <div id="saveStep" style="display:none; text-align:center; margin-top:20px;">
+        <p>Thanks for connecting!</p>
+        <a href="https://associated-industries.com/robert.vcf" 
+           class="btn"
+           download>
+           Save My Contact
+        </a>
     </div>
+
+    
 
     <div class="footer">
       Soil & Groundwater Professionals<br>
@@ -191,26 +195,22 @@
     </div>
   </main>
 
-<!--
-  <script>
-    const form = document.getElementById("connectForm");
-    const saveStep = document.getElementById("saveStep");
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      // Simulated success for now
-      form.classList.add("slide-up");
-      saveStep.classList.add("show");
-    });
+<script>
+  const form = document.getElementById("connectForm");
 
-    document.getElementById("saveContact").addEventListener("click", () => {
-      window.open("https://associatedindustriesgroup.com/robert.vcf", "_blank");
-      setTimeout(() => {
-        window.location.href = "https://associatedindustriesgroup.com";
-      }, 2000);
-    });
-  </script>
--->
+  form.addEventListener("submit", function () {
+    // Wait half a second, then open the vCard in a new tab
+    setTimeout(() => {
+      window.open("https://associated-industries.com/robert.vcf", "_blank");
+    }, 500);
+
+    // After 3 seconds, send them to the homepage
+    setTimeout(() => {
+      window.location.href = "https://associated-industries.com/";
+    }, 3000);
+  });
+</script>
 </body>
 </html>
 
