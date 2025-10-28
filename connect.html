@@ -199,18 +199,36 @@
 <script>
   const form = document.getElementById("connectForm");
 
-  form.addEventListener("submit", function () {
-    // Wait half a second, then open the vCard in a new tab
-    setTimeout(() => {
-      window.open("https://associated-industries.com/robert.vcf", "_blank");
-    }, 500);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    // After 3 seconds, send them to the homepage
+    // send form to Formspree
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    // hide form, show save button
+    form.innerHTML = `
+      <div style="text-align:center;">
+        <h2>Thanks for connecting!</h2>
+        <p>Save our contact below.</p>
+        <a href="https://skyfordscissorhands.github.io/connect/robert.vcf"
+           class="btn"
+           download>
+           Save My Contact
+        </a>
+      </div>
+    `;
+
+    // after 3 seconds redirect to AI homepage
     setTimeout(() => {
       window.location.href = "https://associated-industries.com/";
     }, 3000);
   });
 </script>
+
 </body>
 </html>
 
