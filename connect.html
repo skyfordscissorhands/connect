@@ -203,7 +203,7 @@
 
   const form = document.getElementById("connectForm");
 
-  // Helper to clean up slug text
+  // helper to clean up slug text
   function normalizeSlug(s) {
     return (s || "")
       .toString()
@@ -240,39 +240,42 @@
     return directory;
   }
 
-  // STEP 3 — handle the form submission
+  // STEP 3 — form submit
   function handleSubmit(vcfUrl) {
     return async function (e) {
       e.preventDefault();
 
-      // send form to Formspree
+      // send form to Formspree (no redirect)
       fetch(form.action, {
         method: "POST",
         body: new FormData(form),
         headers: { Accept: "application/json" },
       });
 
-      // show the save contact button
+      // show thank-you + save button
       form.innerHTML = `
         <div style="text-align:center;">
           <h2>Thanks for connecting!</h2>
           <p>Save our contact below.</p>
-          <a href="${vcfUrl}" class="btn" download>Save My Contact</a>
+          <button id="saveContact" class="btn">Save My Info</button>
         </div>
       `;
 
-      // redirect to homepage after 3 seconds
-      setTimeout(() => {
-        window.location.href = "https://associated-industries.com/";
-      }, 3000);
+      // wait for the user to click Save My Info
+      document.getElementById("saveContact").addEventListener("click", () => {
+        window.open(vcfUrl, "_blank"); // open the .vcf file
+        setTimeout(() => {
+          window.location.href = "https://associated-industries.com/";
+        }, 2000); // redirect 2s later
+      });
     };
   }
 
-  // STEP 4 — initialize everything
+  // STEP 4 — initialize
   (async () => {
     const directory = await loadDirectory();
 
-    // Get ?person=slug from URL (example: ?person=robert-lopez)
+    // pick which person this page is for
     const params = new URLSearchParams(window.location.search);
     const personParam = normalizeSlug(params.get("person"));
     const fallbackSlug = Object.keys(directory)[0] || "";
