@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thanks for Connecting</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ai-blue:#0073E5; --ai-green:#22C55E; --ai-light:#E1F1FD; --ai-ink:#15182F; }
+  body{
+    margin:0;font-family:"Open Sans",sans-serif;background:var(--ai-light);
+    display:flex;align-items:center;justify-content:center;min-height:100vh;color:var(--ai-ink);
+  }
+  .card{
+    background:#fff;border-radius:20px;box-shadow:0 12px 24px rgba(0,115,229,.18);
+    padding:32px;text-align:center;max-width:480px;width:100%;
+  }
+  h1{color:var(--ai-blue);margin:0 0 8px;}
+  p{margin:0 0 18px;}
+  .btn{
+    display:inline-block;background:var(--ai-blue);color:#fff;border:none;border-radius:10px;
+    padding:12px 16px;font-weight:600;cursor:pointer;transition:.25s; text-decoration:none;
+  }
+  .btn:hover{ background:var(--ai-green); }
+  .small{font-size:.9rem;color:#455; margin-top:10px;}
+</style>
+</head>
+<body>
+  <main class="card">
+    <h1>Thanks for connecting!</h1>
+    <p>We received your info. Save our contact below.</p>
+    <a class="btn" id="saveContact" href="https://associatedindustriesgroup.com/robert.vcf" target="_blank" rel="noopener">Save My Contact</a>
+    <div class="small">You’ll return to our homepage in a moment.</div>
+  </main>
+<script>
+  // auto-redirect home after 2 seconds of clicking save
+  document.getElementById('saveContact').addEventListener('click', () => {
+    setTimeout(()=>{ window.location.href = 'https://associatedindustriesgroup.com'; }, 2000);
+  });
+</script>
+</body>
+</html>
