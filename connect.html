@@ -197,37 +197,92 @@
 
 
 <script>
+  // STEP 1 — connect to your Google Sheet (public TSV export)
+  const SHEET_TSV_URL =
+    "https://docs.google.com/spreadsheets/d/1dUwWHORlh7et2LX69o5HklUJOG9nOkYrJjdzltbEJv4/export?format=tsv&gid=0";
+
   const form = document.getElementById("connectForm");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  // Helper to clean up slug text
+  function normalizeSlug(s) {
+    return (s || "")
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-");
+  }
 
-    // send form to Formspree
-    fetch(form.action, {
-      method: "POST",
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
+  // STEP 2 — load your sheet and build a map of slugs → vcf links
+  async function loadDirectory() {
+    const res = await fetch(SHEET_TSV_URL, { cache: "no-store" });
+    const text = await res.text();
 
-    // hide form, show save button
-    form.innerHTML = `
-      <div style="text-align:center;">
-        <h2>Thanks for connecting!</h2>
-        <p>Save our contact below.</p>
-        <a href="https://skyfordscissorhands.github.io/connect/robert.vcf"
-           class="btn"
-           download>
-           Save My Contact
-        </a>
-      </div>
-    `;
+    const lines = text.trim().split("\n");
+    const headers = lines[0].split("\t").map((h) => h.trim().toLowerCase());
+    const slugIdx = headers.indexOf("slug");
+    const vcfIdx =
+      headers.indexOf("vcf_download_link") !== -1
+        ? headers.indexOf("vcf_download_link")
+        : headers.indexOf("vcf_link");
 
-    // after 3 seconds redirect to AI homepage
-    setTimeout(() => {
-      window.location.href = "https://associated-industries.com/";
-    }, 3000);
-  });
+    if (slugIdx === -1 || vcfIdx === -1) {
+      console.error("Sheet must include 'slug' and 'vcf_download_link' columns.");
+      return {};
+    }
+
+    const directory = {};
+    for (let i = 1; i < lines.length; i++) {
+      const cols = lines[i].split("\t");
+      const slug = normalizeSlug(cols[slugIdx]);
+      const link = (cols[vcfIdx] || "").trim();
+      if (slug && link) directory[slug] = link;
+    }
+    return directory;
+  }
+
+  // STEP 3 — handle the form submission
+  function handleSubmit(vcfUrl) {
+    return async function (e) {
+      e.preventDefault();
+
+      // send form to Formspree
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      // show the save contact button
+      form.innerHTML = `
+        <div style="text-align:center;">
+          <h2>Thanks for connecting!</h2>
+          <p>Save our contact below.</p>
+          <a href="${vcfUrl}" class="btn" download>Save My Contact</a>
+        </div>
+      `;
+
+      // redirect to homepage after 3 seconds
+      setTimeout(() => {
+        window.location.href = "https://associated-industries.com/";
+      }, 3000);
+    };
+  }
+
+  // STEP 4 — initialize everything
+  (async () => {
+    const directory = await loadDirectory();
+
+    // Get ?person=slug from URL (example: ?person=robert-lopez)
+    const params = new URLSearchParams(window.location.search);
+    const personParam = normalizeSlug(params.get("person"));
+    const fallbackSlug = Object.keys(directory)[0] || "";
+    const chosenSlug = directory[personParam] ? personParam : fallbackSlug;
+    const vcfUrl = directory[chosenSlug] || "";
+
+    form.addEventListener("submit", handleSubmit(vcfUrl));
+  })();
 </script>
+
 
 </body>
 </html>
