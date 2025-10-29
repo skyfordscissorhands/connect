@@ -197,94 +197,45 @@
 
 
 <script>
-  // STEP 1 — connect to your Google Sheet (public TSV export)
-  const SHEET_TSV_URL =
-    "https://docs.google.com/spreadsheets/d/1dUwWHORlh7et2LX69o5HklUJOG9nOkYrJjdzltbEJv4/export?format=tsv&gid=0";
-
   const form = document.getElementById("connectForm");
 
-  // helper to clean up slug text
-  function normalizeSlug(s) {
-    return (s || "")
-      .toString()
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "-");
-  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  // STEP 2 — load your sheet and build a map of slugs → vcf links
-  async function loadDirectory() {
-    const res = await fetch(SHEET_TSV_URL, { cache: "no-store" });
-    const text = await res.text();
+    const formData = new FormData(form);
 
-    const lines = text.trim().split("\n");
-    const headers = lines[0].split("\t").map((h) => h.trim().toLowerCase());
-    const slugIdx = headers.indexOf("slug");
-    const vcfIdx =
-      headers.indexOf("vcf_download_link") !== -1
-        ? headers.indexOf("vcf_download_link")
-        : headers.indexOf("vcf_link");
+    // 1️⃣ Send to Formspree (email)
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
 
-    if (slugIdx === -1 || vcfIdx === -1) {
-      console.error("Sheet must include 'slug' and 'vcf_download_link' columns.");
-      return {};
-    }
+    // 2️⃣ Send to Twilio (text)
+    fetch("https://denim-olm-9346.twil.io/notify", {
+      method: "POST",
+      body: formData
+    });
 
-    const directory = {};
-    for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split("\t");
-      const slug = normalizeSlug(cols[slugIdx]);
-      const link = (cols[vcfIdx] || "").trim();
-      if (slug && link) directory[slug] = link;
-    }
-    return directory;
-  }
+    // 3️⃣ Show Save My Info button
+    form.innerHTML = `
+      <div style="text-align:center;">
+        <h2>Thanks for connecting!</h2>
+        <p>Save our contact below.</p>
+        <button id="saveContact" class="btn">Save My Info</button>
+      </div>
+    `;
 
-  // STEP 3 — form submit
-  function handleSubmit(vcfUrl) {
-    return async function (e) {
-      e.preventDefault();
-
-      // send form to Formspree (no redirect)
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
-      });
-
-      // show thank-you + save button
-      form.innerHTML = `
-        <div style="text-align:center;">
-          <h2>Thanks for connecting!</h2>
-          <p>Save our contact below.</p>
-          <button id="saveContact" class="btn">Save My Info</button>
-        </div>
-      `;
-
-      // wait for the user to click Save My Info
-      document.getElementById("saveContact").addEventListener("click", () => {
-        window.open(vcfUrl, "_blank"); // open the .vcf file
-        setTimeout(() => {
-          window.location.href = "https://associated-industries.com/";
-        }, 2000); // redirect 2s later
-      });
-    };
-  }
-
-  // STEP 4 — initialize
-  (async () => {
-    const directory = await loadDirectory();
-
-    // pick which person this page is for
-    const params = new URLSearchParams(window.location.search);
-    const personParam = normalizeSlug(params.get("person"));
-    const fallbackSlug = Object.keys(directory)[0] || "";
-    const chosenSlug = directory[personParam] ? personParam : fallbackSlug;
-    const vcfUrl = directory[chosenSlug] || "";
-
-    form.addEventListener("submit", handleSubmit(vcfUrl));
-  })();
+    // 4️⃣ When they click Save My Info
+    document.getElementById("saveContact").addEventListener("click", () => {
+      window.open("https://drive.google.com/uc?export=download&id=1VQZk4hr28mNnVdDZgWfHvNuzRjJ1m2E6", "_blank");
+      setTimeout(() => {
+        window.location.href = "https://associated-industries.com/";
+      }, 2000);
+    });
+  });
 </script>
+
 
 
 </body>
