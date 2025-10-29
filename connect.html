@@ -234,7 +234,44 @@
       }, 2000);
     });
   });
+</script
+<script>
+const SHEET_URL = "https://opensheet.vercel.app/1dUwWHORlh7et2LX69o5HklUJOG9nOkYrJjdzltbEJv4/Sheet1";
+const params = new URLSearchParams(window.location.search);
+const personSlug = params.get("person");
+
+fetch(SHEET_URL)
+  .then(response => response.json())
+  .then(data => {
+    const person = data.find(row => row.slug === personSlug);
+
+    if (!person) {
+      document.body.innerHTML = "<h2>Person not found</h2>";
+      return;
+    }
+
+    const form = document.getElementById("connectForm");
+    if (form) {
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        form.innerHTML = `
+          <div style="text-align:center;">
+            <h2>Thanks for connecting with ${person.first}!</h2>
+            <p>Save their contact below.</p>
+            <a href="${person.vcf_download_link}" class="btn" download>Save ${person.first}'s Info</a>
+          </div>
+        `;
+
+        setTimeout(() => {
+          window.location.href = person.website || "https://associated-industries.com/";
+        }, 3000);
+      });
+    }
+  })
+  .catch(error => console.error("Error loading data:", error));
 </script>
+
 
 
 
