@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Keyes;Robert;;;
+FN:Robert Keyes
+ORG:Associated Industries
+TITLE:CEO
+EMAIL:robert@aei-corp.com
+TEL;TYPE=CELL:+14058319140
+ADR;TYPE=WORK:;;3205 Bart Conner Dr;Norman;OK;73072;USA
+URL:https://associated-industries.com
+END:VCARD
