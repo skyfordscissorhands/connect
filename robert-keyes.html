@@ -14,6 +14,27 @@
     }
     .card { background:var(--ai-light); border-radius:24px; box-shadow:0 12px 24px rgba(0,115,229,.2);
       padding:36px; text-align:center; width:100%; max-width:460px; }
+/* center the two steps and constrain form width */
+#shareStep,
+#connectForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* centers contents horizontally */
+    justify-content: center;
+    }
+
+#connectForm input,
+#connectForm button {
+  max-width: 360px;      /* keeps fields nicely narrow inside the card */
+  width: 100%;
+    }
+
+/* optional: match heading style for the form */
+#connectForm h2 {
+  color: var(--ai-blue);
+  margin: 0 0 10px;
+  }
+
     h1 { color:var(--ai-blue); margin:0 0 10px; }
     p { margin:0 0 20px; }
     input,button { width:100%; padding:12px; margin:8px 0; border-radius:10px; font-family:"Open Sans"; }
