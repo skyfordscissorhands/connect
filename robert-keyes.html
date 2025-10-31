@@ -6,62 +6,89 @@
   <title>Let’s Connect | Robert Keyes</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root { --ai-blue:#0073E5; --ai-green:#22C55E; --ai-light:#E1F1FD; --ai-ink:#15182F; }
-    body {
-      margin:0; font-family:"Open Sans",sans-serif; color:var(--ai-ink);
-      background:url("web-trees&lake4.jpg") no-repeat center center fixed; background-size:cover;
-      min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
-    }
-    .card { background:var(--ai-light); border-radius:24px; box-shadow:0 12px 24px rgba(0,115,229,.2);
-      padding:36px; text-align:center; width:100%; max-width:460px; }
-/* center the two steps and constrain form width */
-#shareStep,
-#connectForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   /* centers contents horizontally */
-    justify-content: center;
-    }
-
-#connectForm input,
-#connectForm button {
-  max-width: 360px;      /* keeps fields nicely narrow inside the card */
-  width: 100%;
-    }
-
-/* optional: match heading style for the form */
-#connectForm h2 {
-  color: var(--ai-blue);
-  margin: 0 0 10px;
+  :root { 
+    --ai-blue:#0073E5; 
+    --ai-green:#22C55E; 
+    --ai-light:#E1F1FD; 
+    --ai-ink:#15182F; 
   }
 
-    h1 { color:var(--ai-blue); margin:0 0 10px; }
-    p { margin:0 0 20px; }
-    input,button { width:100%; padding:12px; margin:8px 0; border-radius:10px; font-family:"Open Sans"; }
-    button { background:var(--ai-blue); color:#fff; border:none; font-weight:600; cursor:pointer; transition:.2s; }
-    button:hover { background:var(--ai-green); }
-    .hidden { display:none; }
-/* Step containers centered nicely */
-#shareStep, #connectForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+  body {
+    margin:0; 
+    font-family:"Open Sans",sans-serif; 
+    color:var(--ai-ink);
+    background:url("web-trees&lake4.jpg") no-repeat center center fixed; 
+    background-size:cover;
+    min-height:100vh; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    padding:20px;
+  }
 
-/* Keep form inputs neatly aligned */
-#connectForm input, #connectForm button {
-  max-width: 360px;
-  width: 100%;
-}
+  .card { 
+    background:var(--ai-light); 
+    border-radius:24px; 
+    box-shadow:0 12px 24px rgba(0,115,229,.2);
+    padding:36px; 
+    text-align:center; 
+    width:100%; 
+    max-width:460px; 
+    position: relative;
+  }
 
-/* Optional: Style the form heading */
-#connectForm h2 {
-  color: var(--ai-blue);
-  margin: 0 0 10px;
-}
-    
-  </style>
+  /* Step containers */
+  #shareStep, 
+  #connectForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #connectForm.hidden {
+    display: none;
+  }
+
+  h1, h2 {
+    color: var(--ai-blue);
+    margin: 0 0 10px;
+  }
+
+  p { margin:0 0 20px; }
+
+  input, button {
+    width:100%; 
+    padding:12px; 
+    margin:8px 0; 
+    border-radius:10px; 
+    font-family:"Open Sans";
+  }
+
+  button {
+    background:var(--ai-blue); 
+    color:#fff; 
+    border:none; 
+    font-weight:600; 
+    cursor:pointer; 
+    transition:.2s;
+  }
+
+  button:hover {
+    background:var(--ai-green);
+  }
+
+  /* Smooth fade animation for step switch */
+  .fade {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .fade.show {
+    opacity: 1;
+  }
+</style>
+
 </head>
 <body>
   <main class="card">
@@ -85,36 +112,48 @@
     </form>
   </main>
 
-  <script>
-    // Step 1: download VCF, then reveal the form
-    const saveBtn   = document.getElementById("saveRobert");
-    const shareStep = document.getElementById("shareStep");
-    const formEl    = document.getElementById("connectForm");
+ <script>
+  const saveBtn   = document.getElementById("saveRobert");
+  const shareStep = document.getElementById("shareStep");
+  const formEl    = document.getElementById("connectForm");
 
-    saveBtn.addEventListener("click", () => {
-      // This file MUST exist in the same folder as this HTML:
-      window.location.href = "robert-keyes.vcf";
+  // Step 1 → Download Robert’s VCF → Reveal form
+  saveBtn.addEventListener("click", () => {
+    window.location.href = "robert-keyes.vcf"; // must be in same folder
+
+    // Hide step 1 and show step 2 smoothly
+    setTimeout(() => {
+      shareStep.classList.add("fade");
       setTimeout(() => {
-        shareStep.classList.add("hidden");
-        formEl.classList.remove("hidden");
-      }, 1500);
-    });
+        shareStep.style.display = "none";
+        formEl.style.display = "flex";
+        formEl.classList.add("fade", "show");
+      }, 400);
+    }, 800);
+  });
 
-    // Step 2: submit form to Formspree, then thank you + redirect
-    formEl.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(formEl);
-      fetch(formEl.action, { method:"POST", body:formData, headers:{ Accept:"application/json" }})
-        .then(() => {
-          formEl.innerHTML = `
-            <div style="text-align:center;">
-              <h2>Thanks for connecting!</h2>
-              <p>Your info has been sent to Robert.</p>
-            </div>`;
-          setTimeout(() => { window.location.href = "https://associated-industries.com/"; }, 2000);
-        })
-        .catch(() => { formEl.innerHTML = "<p>Something went wrong. Please try again.</p>"; });
+  // Step 2 → Submit form to Formspree → Show thank-you → Redirect
+  formEl.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(formEl);
+    fetch(formEl.action, {
+      method: "POST",
+      body: formData,
+      headers: { Accept: "application/json" }
+    })
+    .then(() => {
+      formEl.innerHTML = `
+        <div style="text-align:center;">
+          <h2>Thanks for connecting!</h2>
+          <p>Your info has been sent to Robert.</p>
+        </div>`;
+      setTimeout(() => { window.location.href = "https://associated-industries.com/"; }, 2000);
+    })
+    .catch(() => {
+      formEl.innerHTML = "<p>Something went wrong. Please try again.</p>";
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
