@@ -63,8 +63,8 @@
     <!-- Step 2: Collect Visitor Info -->
     <form id="connectForm" class="hidden" action="https://formspree.io/f/mvgvzlye" method="POST">
       <h2>Now share your info</h2>
-      <p>{{Employee Name}} will reach out soon.</p>
-      <input type="hidden" name="_subject" value="New contact for {{Employee Name}}" />
+      <p><span class="employee-name"></span> will reach out soon.</p>
+      <input type="hidden" name="_subject" id="subjectField" />
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="tel" name="phone" placeholder="Your Phone" required>
@@ -74,11 +74,24 @@
   </main>
 
   <script>
-    // Step 1: Save {{Employee Name}}’s Info
+    // Step 1: Save employee info
     const saveBtn = document.getElementById("saveEmployee");
     const form = document.getElementById("connectForm");
     const shareStep = document.getElementById("shareStep");
     const card = document.getElementById("card");
+    // Temporary placeholder name (will become dynamic later)
+    const employeeName = "Employee Name";
+
+      document.querySelectorAll(".employee-name").forEach(el => {
+      el.textContent = employeeName;
+    });
+
+    const subjectField = document.getElementById("subjectField");
+
+    if (subjectField) {
+      subjectField.value = `New contact for ${employeeName}`;
+    }
+
 
     saveBtn.addEventListener("click", () => {
       // ✅ This file should sit next to this HTML file in GitHub
@@ -105,9 +118,10 @@
         form.innerHTML = `
           <div style="text-align:center;">
             <h2>Thanks for connecting!</h2>
-            <p>Your info has been sent to {{Employee Name}}.</p>
+            <p>Your info has been sent to ${employeeName}.</p>
           </div>
-        `;
+      `;
+
         setTimeout(() => {
           window.location.href = "https://associated-industries.com/";
         }, 2500);
