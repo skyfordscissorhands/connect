@@ -4,7 +4,7 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Let’s Connect | Robert Keyes</title>
+  <title>Let’s Connect </title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -53,18 +53,18 @@
 
 <body>
   <main class="card" id="card">
-    <!-- Step 1: Share Robert’s Info -->
+    <!-- Step 1: Share Employee Info -->
     <div id="shareStep">
       <h1>Let’s Connect</h1>
-      <p>Save Robert’s contact info first, then share yours below.</p>
-      <button id="saveRobert" class="btn">Save Robert’s Info</button>
+      <p>Save <span class="employee-name"></span>’s contact info first, then share yours below.</p>
+      <button id="saveEmployee" class="btn">Save <span class="employee-name"></span>’s Info</button>
     </div>
 
     <!-- Step 2: Collect Visitor Info -->
     <form id="connectForm" class="hidden" action="https://formspree.io/f/mvgvzlye" method="POST">
       <h2>Now share your info</h2>
-      <p>Robert will reach out soon.</p>
-      <input type="hidden" name="_subject" value="New contact for Robert Keyes" />
+      <p>{{Employee Name}} will reach out soon.</p>
+      <input type="hidden" name="_subject" value="New contact for {{Employee Name}}" />
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="tel" name="phone" placeholder="Your Phone" required>
@@ -74,15 +74,15 @@
   </main>
 
   <script>
-    // Step 1: Save Robert’s Info
-    const saveBtn = document.getElementById("saveRobert");
+    // Step 1: Save {{Employee Name}}’s Info
+    const saveBtn = document.getElementById("saveEmployee");
     const form = document.getElementById("connectForm");
     const shareStep = document.getElementById("shareStep");
     const card = document.getElementById("card");
 
     saveBtn.addEventListener("click", () => {
       // ✅ This file should sit next to this HTML file in GitHub
-      window.location.href = "robert-keyes.vcf";
+      window.location.href = "default-employee.vcf";
 
       // Transition to form after 2 seconds
       setTimeout(() => {
@@ -105,7 +105,7 @@
         form.innerHTML = `
           <div style="text-align:center;">
             <h2>Thanks for connecting!</h2>
-            <p>Your info has been sent to Robert.</p>
+            <p>Your info has been sent to {{Employee Name}}.</p>
           </div>
         `;
         setTimeout(() => {
