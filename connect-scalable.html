@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Let’s Connect | Robert Keyes</title>
+  <title>Let’s Connect</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
   :root { 
@@ -92,18 +92,18 @@
 </head>
 <body>
   <main class="card">
-    <!-- Step 1: Share Robert’s Info first -->
+    <!-- Step 1: Share employee’s Info first -->
     <div id="shareStep">
       <h1>Let’s Connect</h1>
-      <p>Save Robert’s contact first, then share your info.</p>
-      <button id="saveRobert">Save Robert’s Info</button>
+      <p>Save <span class="employee-name"></span>’s contact first, then share your info.</p>
+      <button id="saveEmployee">Save <span class="employee-name"></span>’s Info</button>
     </div>
 
     <!-- Step 2: Collect visitor info (emails Robert) -->
     <form id="connectForm" class="hidden" action="https://eop9vtg31vsceo4.m.pipedream.net" method="POST">
       <h2>Now share your info</h2>
-      <p>Robert will reach out soon.</p>
-      <input type="hidden" name="_subject" value="New contact for Robert Keyes">
+      <p><span class="employee-name"></span> will reach out soon.</p>
+      <input type="hidden" name="_subject" id="subjectField">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="tel" name="phone" placeholder="Your Phone" required>
@@ -113,13 +113,25 @@
   </main>
 
  <script>
-  const saveBtn   = document.getElementById("saveRobert");
+  const saveBtn   = document.getElementById("saveEmployee");
+  const employeeName = "Employee Name";
+
+  document.querySelectorAll(".employee-name").forEach(el => {
+     el.textContent = employeeName;
+  });
+
+  const subjectField = document.getElementById("subjectField");
+  if (subjectField) {
+    subjectField.value = `New contact for ${employeeName}`;
+  }
   const shareStep = document.getElementById("shareStep");
   const formEl    = document.getElementById("connectForm");
 
-  // Step 1 → Download Robert’s VCF → Reveal form
+  // Step 1 → Download  VCF → Reveal form
   saveBtn.addEventListener("click", () => {
-    window.location.href = "robert-keyes.vcf"; // must be in same folder
+  const vcfFile = "default-employee.vcf";
+   window.location.href = vcfFile;
+    // must be in same folder
 
     // Hide step 1 and show step 2 smoothly
     setTimeout(() => {
@@ -145,7 +157,7 @@
       formEl.innerHTML = `
         <div style="text-align:center;">
           <h2>Thanks for connecting!</h2>
-          <p>Your info has been sent to Robert.</p>
+          <p>Your info has been sent to ${employeeName}.</p>
         </div>`;
       setTimeout(() => { window.location.href = "https://associated-industries.com/"; }, 2000);
     })
