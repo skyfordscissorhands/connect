@@ -113,6 +113,11 @@
   </main>
 
  <script>
+
+   // Get slug from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const slug = urlParams.get("slug");
+   
   const saveBtn   = document.getElementById("saveEmployee");
   const employeeName = "Employee Name";
 
