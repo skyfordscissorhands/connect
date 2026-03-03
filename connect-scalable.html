@@ -121,8 +121,18 @@ const slug = urlParams.get("slug");
 let employeeName = "Employee Name";
 let vcfFile = "default-employee.vcf";
 
+const saveBtn = document.getElementById("saveEmployee");
+const shareStep = document.getElementById("shareStep");
+const formEl = document.getElementById("connectForm");
+
+// Disable button until employee loads
+saveBtn.disabled = true;
+
 async function loadEmployee() {
-  if (!slug) return;
+  if (!slug) {
+    saveBtn.disabled = false;
+    return;
+  }
 
   const res = await fetch(`https://eosi1gbo0ej0dm9.m.pipedream.net?slug=${encodeURIComponent(slug)}`);
   const data = await res.json();
@@ -140,13 +150,12 @@ async function loadEmployee() {
   if (subjectField) {
     subjectField.value = `New contact for ${employeeName}`;
   }
+
+  // Enable button once ready
+  saveBtn.disabled = false;
 }
 
 loadEmployee();
-
-const saveBtn = document.getElementById("saveEmployee");
-const shareStep = document.getElementById("shareStep");
-const formEl = document.getElementById("connectForm");
 
 // Step 1 → Download employee VCF → Reveal form
 saveBtn.addEventListener("click", () => {
