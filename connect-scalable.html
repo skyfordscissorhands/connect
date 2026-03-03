@@ -152,12 +152,11 @@ async function loadEmployee() {
     subjectField.value = `New contact for ${employeeName}`;
   }
 
-  // ADD THIS RIGHT HERE
+  // Update hidden slug field
   const slugField = document.getElementById("slugField");
   if (slugField) {
     slugField.value = slug;
   }
-}
 
   // Enable button once ready
   saveBtn.disabled = false;
@@ -167,7 +166,9 @@ loadEmployee();
 
 // Step 1 → Download employee VCF → Reveal form
 saveBtn.addEventListener("click", () => {
-  window.location.href = vcfFile;
+  if (vcfFile) {
+    window.location.href = vcfFile;
+  }
 
   setTimeout(() => {
     shareStep.classList.add("fade");
