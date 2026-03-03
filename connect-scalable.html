@@ -114,63 +114,79 @@
 
  <script>
 
-   // Get slug from URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get("slug");
-   
-  const saveBtn   = document.getElementById("saveEmployee");
-  const employeeName = "Employee Name";
+// Get slug from URL
+const urlParams = new URLSearchParams(window.location.search);
+const slug = urlParams.get("slug");
 
+let employeeName = "Employee Name";
+let vcfFile = "default-employee.vcf";
+
+async function loadEmployee() {
+  if (!slug) return;
+
+  const res = await fetch(`https://eosi1gbo0ej0dm9.m.pipedream.net?slug=${encodeURIComponent(slug)}`);
+  const data = await res.json();
+
+  employeeName = data.full_name || "Employee Name";
+  vcfFile = data.vcf_download_link || "default-employee.vcf";
+
+  // Update name on page
   document.querySelectorAll(".employee-name").forEach(el => {
-     el.textContent = employeeName;
+    el.textContent = employeeName;
   });
 
+  // Update email subject
   const subjectField = document.getElementById("subjectField");
   if (subjectField) {
     subjectField.value = `New contact for ${employeeName}`;
   }
-  const shareStep = document.getElementById("shareStep");
-  const formEl    = document.getElementById("connectForm");
+}
 
-  // Step 1 → Download  VCF → Reveal form
-  saveBtn.addEventListener("click", () => {
-  const vcfFile = "default-employee.vcf";
-   window.location.href = vcfFile;
-    // must be in same folder
+loadEmployee();
 
-    // Hide step 1 and show step 2 smoothly
+const saveBtn = document.getElementById("saveEmployee");
+const shareStep = document.getElementById("shareStep");
+const formEl = document.getElementById("connectForm");
+
+// Step 1 → Download employee VCF → Reveal form
+saveBtn.addEventListener("click", () => {
+  window.location.href = vcfFile;
+
+  setTimeout(() => {
+    shareStep.classList.add("fade");
     setTimeout(() => {
-      shareStep.classList.add("fade");
-      setTimeout(() => {
-        shareStep.style.display = "none";
-        formEl.style.display = "flex";
-        formEl.classList.add("fade", "show");
-      }, 400);
-    }, 800);
-  });
+      shareStep.style.display = "none";
+      formEl.style.display = "flex";
+      formEl.classList.add("fade", "show");
+    }, 400);
+  }, 800);
+});
 
-  // Step 2 → Submit form to Formspree → Show thank-you → Redirect
-  formEl.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const formData = new FormData(formEl);
-    fetch(formEl.action, {
-      method: "POST",
-      body: formData,
-      headers: { Accept: "application/json" }
-    })
-    .then(() => {
-      formEl.innerHTML = `
-        <div style="text-align:center;">
-          <h2>Thanks for connecting!</h2>
-          <p>Your info has been sent to ${employeeName}.</p>
-        </div>`;
-      setTimeout(() => { window.location.href = "https://associated-industries.com/"; }, 2000);
-    })
-    .catch(() => {
-      formEl.innerHTML = "<p>Something went wrong. Please try again.</p>";
-    });
+// Step 2 → Submit form → Show thank-you → Redirect
+formEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(formEl);
+
+  fetch(formEl.action, {
+    method: "POST",
+    body: formData,
+    headers: { Accept: "application/json" }
+  })
+  .then(() => {
+    formEl.innerHTML = `
+      <div style="text-align:center;">
+        <h2>Thanks for connecting!</h2>
+        <p>Your info has been sent to ${employeeName}.</p>
+      </div>`;
+    setTimeout(() => {
+      window.location.href = "https://associated-industries.com/";
+    }, 2000);
+  })
+  .catch(() => {
+    formEl.innerHTML = "<p>Something went wrong. Please try again.</p>";
   });
+});
+
 </script>
-
 </body>
 </html>
