@@ -141,6 +141,8 @@ async function loadEmployee() {
   employeeName = data.full_name || "Employee Name";
   vcfFile = data.vcf_download_link || "default-employee.vcf";
 
+  document.getElementById("slugField").value = slug;
+
   // Update name on page
   document.querySelectorAll(".employee-name").forEach(el => {
     el.textContent = employeeName;
