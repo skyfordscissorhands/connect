@@ -141,7 +141,11 @@ async function loadEmployee() {
 
   employeeName = data.full_name || "Employee Name";
   vcfFile = data.vcf_download_link || "default-employee.vcf";
-  document.getElementById("employeePhoto").src = data.photo_url;
+
+  const photo = document.getElementById("employeePhoto");
+  if (photo && data.photo_url) {
+    photo.src = data.photo_url;
+  }
 
   document.getElementById("slugField").value = slug;
 
