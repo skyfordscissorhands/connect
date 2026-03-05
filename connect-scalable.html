@@ -147,7 +147,7 @@ async function loadEmployee() {
   employeeName = data.full_name || "Employee Name";
   vcfFile = data.vcf_download_link || "default-employee.vcf";
 
-  document.getElementById("employeePhoto").src = `/employee-photos/${slug}.jpg`;
+  document.getElementById("employeePhoto").src = `/connect/employee-photos/${slug}.jpg`;
 
   const photo = document.getElementById("employeePhoto");
   if (photo && data.photo_url) {
