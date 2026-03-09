@@ -170,6 +170,11 @@ async function loadEmployee() {
   saveBtn.disabled = false;
 }
 
+const photo = document.getElementById("employeePhoto");
+if (photo && slug) {
+  photo.src = `employee-photos/${slug}.jpg`;
+}
+   
 loadEmployee();
 
 // Step 1 → Download employee VCF → Reveal form
