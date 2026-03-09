@@ -148,8 +148,8 @@ async function loadEmployee() {
   vcfFile = data.vcf_download_link || "default-employee.vcf";
 
   const photo = document.getElementById("employeePhoto");
-  if (photo && data.photo_url) {
-    photo.src = data.photo_url;
+  if (photo) {
+    photo.src = `/connect/employee-photos/${slug}.jpg`;
   }
 
   const slugField = document.getElementById("slugField");
