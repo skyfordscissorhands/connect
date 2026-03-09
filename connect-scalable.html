@@ -147,14 +147,13 @@ async function loadEmployee() {
   employeeName = data.full_name || "Employee Name";
   vcfFile = data.vcf_download_link || "default-employee.vcf";
 
-  document.getElementById("employeePhoto").src = `/connect/employee-photos/${slug}.jpg`;
-
   const photo = document.getElementById("employeePhoto");
   if (photo && data.photo_url) {
     photo.src = data.photo_url;
   }
 
-  document.getElementById("slugField").value = slug;
+  const slugField = document.getElementById("slugField");
+  if (slugField) slugField.value = slug;
 
   // Update name on page
   document.querySelectorAll(".employee-name").forEach(el => {
