@@ -103,20 +103,24 @@
     <img class="card-logo" src="AI-all-logos-blue.svg" alt="Associated Industries Logos">
     <!-- Step 1: Share employee’s Info first -->
     <div id="shareStep">
-     <img id="employeeQR"
-       src=""
-       alt="QR Code"
-       style="width:160px;height:160px;margin:0 auto 20px;display:block;">
-      
-    <h1>Let’s Connect</h1>
    
     <img id="employeePhoto"
      src=""
      alt="Employee Photo"
      style="width:180px;height:180px;object-fit:cover;object-position:center 20%;border-radius:20px;margin:10px auto 20px;display:block;box-shadow:0 8px 20px rgba(0,0,0,0.15);">                
+
+      <h1 class="employee-name">Loading...</h1>
+
+      <p class="employee-title" id="employeeTitle"></p>
+
+      <p class="employee-email" id="employeeEmail"></p>
       
-      <p>Save <span class="employee-name">Loading...</span>’s contact first, then share your info.</p>
-<button id="saveEmployee">Save <span class="employee-name">Loading...</span>’s Info</button>
+      <button id="saveEmployee">Save <span class="employee-name">Loading...</span>’s Info</button>
+      
+      <img id="employeeQR"
+         src=""
+         alt="QR Code"
+         style="width:160px;height:160px;margin:0 auto 20px;display:block;">                                                                                
     </div>
 
     <!-- Step 2: Collect visitor info (emails Robert) -->
