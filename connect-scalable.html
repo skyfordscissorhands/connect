@@ -247,6 +247,10 @@ async function loadEmployee() {
 
   // Enable button once ready
   saveBtn.disabled = false;
+
+  const photo = document.getElementById("employeePhoto");
+    if (photo && slug) {
+  photo.src = `employee-photos/${slug}.jpg`;
 }
    
 loadEmployee();
