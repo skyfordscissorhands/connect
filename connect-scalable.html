@@ -155,7 +155,7 @@
 
       <p class="employee-email" id="employeeEmail"></p>
       
-      <button id="saveEmployee">Save <span class="employee-name">Loading...</span>’s Info</button>
+      <button id="saveEmployee">Save <span class="employee-button-name">Loading...</span>’s Info</button>
       
       <img id="employeeQR"
          src=""
@@ -189,7 +189,7 @@ if (slug) {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-  document.querySelectorAll(".employee-name").forEach(el => {
+  document.querySelectorAll(".employee-name, .employee-button-name").forEach(el => {
     el.textContent = quickName;
   });
 }
@@ -223,6 +223,9 @@ async function loadEmployee() {
   employeeName = data.full_name || "Employee Name";
   vcfFile = data.vcf_download_link || "default-employee.vcf";
 
+  document.getElementById("employeeTitle").textContent = data.title || "";
+  document.getElementById("employeeEmail").textContent = data.email || "";
+
   const photo = document.getElementById("employeePhoto");
   if (photo) {
     photo.src = `employee-photos/${slug}.jpg`;
@@ -244,11 +247,6 @@ async function loadEmployee() {
 
   // Enable button once ready
   saveBtn.disabled = false;
-}
-
-const photo = document.getElementById("employeePhoto");
-if (photo && slug) {
-  photo.src = `employee-photos/${slug}.jpg`;
 }
    
 loadEmployee();
