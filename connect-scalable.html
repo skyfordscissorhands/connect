@@ -73,6 +73,12 @@
   margin-bottom:18px;
 }
 
+.employee-phone{
+  font-size:14px;
+  opacity:.7;
+  margin-bottom:18px;
+}
+    
 .employee-qr{
   width:120px;
   margin:20px auto 5px;
@@ -153,7 +159,9 @@
 
       <p class="employee-title" id="employeeTitle"></p>
 
-      <p class="employee-email" id="employeeEmail"></p>
+      <p class="employee-email" id="employeeEmail"></p
+
+      <p class="employee-phone" id="employeePhone"></p>                                              
       
       <button id="saveEmployee">Save <span class="employee-button-name">Loading...</span>’s Info</button>
       
@@ -232,6 +240,7 @@ async function loadEmployee() {
 
   document.getElementById("employeeTitle").textContent = data.title || "";
   document.getElementById("employeeEmail").textContent = data.email || "";
+  document.getElementById("employeePhone").textContent = data.phone || "";
 
   const slugField = document.getElementById("slugField");
   if (slugField) slugField.value = slug;
