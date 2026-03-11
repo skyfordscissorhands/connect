@@ -193,6 +193,13 @@ if (slug) {
     el.textContent = quickName;
   });
 }
+
+// Load photo instantly from slug
+const photo = document.getElementById("employeePhoto");
+if (photo && slug) {
+  photo.src = `employee-photos/${slug}.jpg`;
+}
+   
 // Create QR code for this employee page
 const qr = document.getElementById("employeeQR");
 
