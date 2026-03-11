@@ -233,11 +233,6 @@ async function loadEmployee() {
   document.getElementById("employeeTitle").textContent = data.title || "";
   document.getElementById("employeeEmail").textContent = data.email || "";
 
-  const photo = document.getElementById("employeePhoto");
-  if (photo) {
-    photo.src = `employee-photos/${slug}.jpg`;
-  }
-
   const slugField = document.getElementById("slugField");
   if (slugField) slugField.value = slug;
 
