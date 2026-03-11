@@ -36,8 +36,15 @@
   }
 
   .card-header{
-    background:url("soil-card-background.png") center top / cover no-repeat;
+    position:relative;
     height:220px;
+    margin:-40px -36px 0 -36px;
+    background:url("soil-card-background.png") center -30px / cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding-top:18px;
+    overflow:hidden;
   }
     
   .card-logo{
@@ -48,17 +55,16 @@
   }
 
   .employee-photo{
-    width:180px;
-    height:180px;
+    width:170px;
+    height:170px;
     object-fit:cover;
-    object-position:center 20%;
     border-radius:20px;
-    margin:-55px auto 20px;
+    margin:-65px auto 18px;
     display:block;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
-    border:5px solid #fff;
     position:relative;
-    z-index:2;
+    z-index:5;
+    border:6px solid #fff;
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
   }
 
 .employee-name{
