@@ -37,11 +37,14 @@
 
   .card-header{
     background:url("soil-layers-cards.png") center top no-repeat;
-    background-size:contain;
-    height:200px;
+    height:220px;
     border-radius:24px 24px 0 0;
-    margin:-40px -36px 60px -36px;
-    position:relative;
+    margin:-40px -36px 25px -36px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding-top:20px;
+    overflow:hidden;
   }
     
   .card-logo{
@@ -52,15 +55,17 @@
   }
 
   .employee-photo{
-    width:170px;
-    height:170px;
+    width:180px;
+    height:180px;
     object-fit:cover;
-    border-radius:18px;
-    position:relative;
-    margin:-90px auto 18px;
+    object-position:center 20%;
+    border-radius:20px;
+    margin:-55px auto 20px;
     display:block;
-    box-shadow:0 12px 30px rgba(0,0,0,0.18);
-    border:6px solid #fff;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    border:5px solid #fff;
+    position:relative;
+    z-index:2;
   }
 
 .employee-name{
