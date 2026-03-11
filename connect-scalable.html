@@ -36,6 +36,13 @@
     max-width:420px; 
   }
 
+  .card-header{
+    background:linear-gradient(135deg,#0073E5,#22C55E);
+    height:80px;
+    border-radius:20px 20px 0 0;
+    margin:-40px -36px 25px -36px;
+  }
+    
   .card-logo{
     width:100%;
     max-width:340px;
@@ -47,11 +54,11 @@
     width:170px;
     height:170px;
     object-fit:cover;
-    object-position:center 20%;
     border-radius:18px;
-    margin:5px auto 18px;
+    margin:-85px auto 15px;
     display:block;
-    box-shadow:0 10px 22px rgba(0,0,0,0.15);
+    border:6px solid white;
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
   }
 
 .employee-name{
@@ -148,6 +155,7 @@
 <body>
   
   <main class="card">
+    <div class="card-header"></div>
     <img class="card-logo" src="AI-all-logos-blue.svg" alt="Associated Industries Logos">
     <!-- Step 1: Share employee’s Info first -->
     <div id="shareStep">
