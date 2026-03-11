@@ -246,7 +246,7 @@ async function loadEmployee() {
   if (slugField) slugField.value = slug;
 
   // Update name on page
-  document.querySelectorAll(".employee-name").forEach(el => {
+  document.querySelectorAll(".employee-name, .employee-button-name").forEach(el => {
     el.textContent = employeeName;
   });
 
