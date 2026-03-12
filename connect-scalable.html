@@ -132,6 +132,16 @@
     border:1px solid rgba(0,115,229,.15);
 }
 
+/* FORM CARD (new) */
+.form-card{
+  background:#ffffff;
+  border-radius:18px;
+  padding:24px;
+  width:100%;
+  margin:-90px auto 0;
+  box-shadow:0 10px 28px rgba(0,0,0,0.08);
+}
+
   h1, h2 {
     color: var(--ai-blue);
     margin: 0 0 10px;
@@ -226,6 +236,9 @@
 
     <!-- Step 2: Collect visitor info (emails Robert) -->
     <form id="connectForm" class="hidden" action="https://eoz21saxgb2b1vg.m.pipedream.net" method="POST">
+
+    <div class="form-card">
+      
       <h2>Now share your info</h2>
       <p><span class="employee-name"></span> will reach out soon.</p>
       <input type="hidden" name="_subject" id="subjectField">
@@ -234,7 +247,9 @@
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="tel" name="phone" placeholder="Your Phone" required>
       <input type="text" name="company" placeholder="Company (optional)">
-      <button type="submit">Send Info</button>
+      <button type="submit">Send Info</button
+     </div>
+      
     </form>
  </main>
 
