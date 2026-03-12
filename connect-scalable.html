@@ -40,7 +40,7 @@
 
   .card-header{
     position:relative;
-    height:340px;
+    height:clamp(200px, 32vh, 340px);
     margin:-40px -36px 0 -36px;
     background:url("soil-card-background.png") center -70px / cover no-repeat;
   }
@@ -55,12 +55,12 @@
   }
 
   .employee-photo{
-    width:250px;
-    height:250px;
+    width:clamp(140px, 22vw, 200px);
+    height:clamp(140px, 22vw, 200px);
     object-fit:cover;
     object-position:center 20%;
     border-radius:20px;
-    margin:-200px auto 14px;
+    margin:-200px auto 10px;
     display:block;
     position:relative;
     z-index:5;
