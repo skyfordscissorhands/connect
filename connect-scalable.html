@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Let’s Connect</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <style>
+  <style
+
+  * {
+  box-sizing: border-box;
+}
+    
   :root { 
     --ai-blue:#0073E5; 
     --ai-green:#22C55E; 
@@ -134,11 +139,24 @@
   background:#ffffff;
   border-radius:18px;
   padding:24px;
+  
   width:100%;
   max-width:340px;
   
   margin:-130px auto 0;
+  
   box-shadow:0 10px 28px rgba(0,0,0,0.08);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* center inputs inside the form card */
+.form-card input,
+.form-card button{
+  width:100%;
+  max-width:280px;
 }
 
   h1, h2 {
