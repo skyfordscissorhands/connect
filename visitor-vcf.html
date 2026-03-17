@@ -13,10 +13,16 @@ const phone = params.get("phone") || "";
 const email = params.get("email") || "";
 const company = params.get("company") || "";
 
+// Split name into first + last (important for iPhone)
+const nameParts = name.split(" ");
+const firstName = nameParts[0] || "";
+const lastName = nameParts.slice(1).join(" ") || "";
+
 const vcf = `BEGIN:VCARD
 VERSION:3.0
+N:${lastName};${firstName}
 FN:${name}
-TEL:${phone}
+TEL;TYPE=CELL:${phone}
 EMAIL:${email}
 ORG:${company}
 END:VCARD`;
