@@ -22,9 +22,9 @@ const vcf = `BEGIN:VCARD
 VERSION:3.0
 N:${lastName};${firstName}
 FN:${name}
+ORG:${company || ""}
 TEL;TYPE=CELL:${phone}
 EMAIL:${email}
-NOTE:${company || ""}
 END:VCARD`;
 
 const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
