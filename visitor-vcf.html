@@ -24,7 +24,7 @@ N:${lastName};${firstName}
 FN:${name}
 TEL;TYPE=CELL:${phone}
 EMAIL:${email}
-ORG:${company}
+NOTE:${company || ""}
 END:VCARD`;
 
 const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
