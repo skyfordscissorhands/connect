@@ -355,14 +355,18 @@ loadEmployee();
 saveBtn.addEventListener("click", () => {
   window.location.href = vcfFile;
 
+  // Show confirmation first
+  shareStep.innerHTML = `
+    <div style="text-align:center; padding:40px 20px;">
+      <h2 style="color:#0073E5;">Contact Saved</h2>
+      <p style="margin-top:10px;">Now share your info so ${employeeName} can follow up.</p>
+    </div>
+  `;
+
   setTimeout(() => {
-    shareStep.classList.add("fade");
-    setTimeout(() => {
-      shareStep.style.display = "none";
-      formEl.style.display = "flex";
-      formEl.classList.add("fade", "show");
-    }, 400);
-  }, 800);
+    shareStep.style.display = "none";
+    formEl.style.display = "flex";
+  }, 1500);
 });
 
 // Step 2 → Submit form → Show thank-you → Redirect
