@@ -368,9 +368,14 @@ saveBtn.addEventListener("click", () => {
   shareStep.innerHTML = `
     <div style="text-align:center; padding:40px 20px;">
       <h2 style="color:#0073E5;">Contact Saved</h2>
-      <p style="margin-top:10px;">Now share your info so ${employeeName} can follow up.</p>
-    </div>
-  `;
+     <p style="margin-top:10px;">
+      ${employeeName}'s info is now in your phone.
+    </p>
+    <p style="font-size:13px; opacity:.7; margin-top:8px;">
+      Want them to have yours too?
+    </p>
+  </div>
+`;
 
   setTimeout(() => {
     shareStep.style.display = "none";
