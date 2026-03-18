@@ -174,6 +174,13 @@
     font-family:"Open Sans";
   }
 
+/* Highlights active field for better UX */
+  input:focus {
+    outline: none; /* removes default browser outline */
+    border: 1px solid #0073E5; /* AI blue border */
+    box-shadow: 0 0 0 2px rgba(0,115,229,0.15); /* soft glow */
+  }
+    
   button {
     background:var(--ai-blue); 
     color:#fff; 
@@ -260,7 +267,7 @@
 
     <div class="form-card">
       
-      <h2>Now share your info</h2>
+      <h2>You're connected</h2>
       <p style="margin-bottom:18px;">
         Share your info so <strong><span class="employee-name"></span></strong> can follow up directly.
       </p>
