@@ -261,14 +261,23 @@
     <div class="form-card">
       
       <h2>Now share your info</h2>
-      <p><span class="employee-name"></span> will reach out soon.</p>
+      <p style="margin-bottom:18px;">
+        Share your info so <strong><span class="employee-name"></span></strong> can follow up directly.
+      </p>
       <input type="hidden" name="_subject" id="subjectField">
       <input type="hidden" name="slug" id="slugField">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="tel" name="phone" placeholder="Your Phone" required>
       <input type="text" name="company" placeholder="Company (optional)">
-      <button type="submit">Send Info</button>
+      <button type="submit">Share My Info</button>
+
+      <!-- Skip option -->
+      <p style="margin-top:12px; font-size:12px; opacity:.6;">
+        <a href="#" id="skipForm" style="color:inherit; text-decoration:underline;">
+          Skip this step
+        </a>
+    </p>
      </div>
       
     </form>
@@ -366,7 +375,7 @@ saveBtn.addEventListener("click", () => {
   setTimeout(() => {
     shareStep.style.display = "none";
     formEl.style.display = "flex";
-  }, 1500);
+  }, 2500);
 });
 
 // Step 2 → Submit form → Show thank-you → Redirect
@@ -394,6 +403,19 @@ formEl.addEventListener("submit", (e) => {
   });
 });
 
+// Skip Button (Optional Step)
+
+const skipBtn = document.getElementById("skipForm");
+
+if (skipBtn) {
+  skipBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Redirect user if they choose to skip
+    window.location.href = "https://associated-industries.com/";
+  });
+}   
+   
 </script>
 </body>
 </html>
