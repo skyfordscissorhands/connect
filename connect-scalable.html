@@ -323,6 +323,8 @@
     </form>
  </main>
 
+<script src="employees.js"></script>
+  
  <script>
 
 // Get slug from URL
@@ -364,42 +366,47 @@ const formEl = document.getElementById("connectForm");
 // Disable button until employee loads
 saveBtn.disabled = true;
 
-async function loadEmployee() {
-  if (!slug) {
-    saveBtn.disabled = false;
-    return;
-  }
+function loadEmployee() {
+  if (!slug) return;
 
-  const res = await fetch(`https://eosi1gbo0ej0dm9.m.pipedream.net?slug=${encodeURIComponent(slug)}`);
-  const data = await res.json();
+  const employee = employees[slug];
+  if (!employee) return;
 
-  employeeName = data.full_name || "Employee Name";
-  vcfFile = data.vcf_download_link || "default-employee.vcf";
+  document.getElementById("employeeTitle").textContent = employee.title || "";
+  document.getElementById("employeeEmail").textContent = employee.email || "";
+  document.getElementById("employeePhone").textContent = employee.phone || "";
 
-  document.getElementById("employeeTitle").textContent = data.title || "";
-  document.getElementById("employeeEmail").textContent = data.email || "";
-  document.getElementById("employeePhone").textContent = data.phone || "";
-
-  const slugField = document.getElementById("slugField");
-  if (slugField) slugField.value = slug;
-
-  // Update name on page
-  document.querySelectorAll(".employee-name, .employee-button-name").forEach(el => {
-    el.textContent = employeeName;
-  });
-
-  // Update email subject
-  const subjectField = document.getElementById("subjectField");
-  if (subjectField) {
-    subjectField.value = `New contact for ${employeeName}`;
-  }
-
-  // Enable button once ready
   saveBtn.disabled = false;
 }
-  
-loadEmployee();
 
+loadEmployee();
+loadEmployeeExtras();
+   
+  async function loadEmployeeExtras() {
+  if (!slug) return;
+
+  try {
+    const res = await fetch(`https://eosi1gbo0ej0dm9.m.pipedream.net?slug=${encodeURIComponent(slug)}`);
+    const data = await res.json();
+
+    employeeName = data.full_name || employeeName;
+    vcfFile = data.vcf_download_link || vcfFile;
+
+    // Update name everywhere
+    document.querySelectorAll(".employee-name, .employee-button-name").forEach(el => {
+      el.textContent = employeeName;
+    });
+
+    // Update subject line
+    const subjectField = document.getElementById("subjectField");
+    if (subjectField) {
+      subjectField.value = `New contact for ${employeeName}`;
+    }
+
+  } catch (err) {
+    console.log("Extras failed to load", err);
+  }
+}
 // Step 1 → Download employee VCF → Reveal form
 saveBtn.addEventListener("click", () => {
   window.location.href = vcfFile;
