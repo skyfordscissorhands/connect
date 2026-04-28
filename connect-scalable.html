@@ -330,6 +330,13 @@
 // Get slug from URL
 const urlParams = new URLSearchParams(window.location.search);
 const slug = urlParams.get("slug");
+
+// Add this
+const slugField = document.getElementById("slugField");
+if (slugField && slug) {
+  slugField.value = slug;
+}
+
 // Show quick name from slug
 if (slug) {
   const quickName = slug
