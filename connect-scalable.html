@@ -430,8 +430,13 @@ const last = fullName[1] || "";
   // Build dynamic VCF link
   const vcfLink = `/vcf.html?first=${first}&last=${last}&phone=${phone}&email=${email}`;
   
-  // Trigger download
-  window.location.href = vcfLink;
+  // Trigger download without leaving page
+const link = document.createElement("a");
+link.href = vcfLink;
+link.download = "";
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
 
   // Show confirmation
   shareStep.innerHTML = `
