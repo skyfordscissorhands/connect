@@ -11,10 +11,10 @@ const email = params.get("email") || "";
 
 const vcard = `BEGIN:VCARD
 VERSION:3.0
-N:${last};${first}
+N:${last};${first};;;
 FN:${first} ${last}
-TEL:${phone}
-EMAIL:${email}
+TEL;TYPE=CELL:${phone}
+EMAIL;TYPE=INTERNET:${email}
 END:VCARD`;
 
 const blob = new Blob([vcard], { type: "text/vcard" });
