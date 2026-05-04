@@ -331,13 +331,13 @@
 const urlParams = new URLSearchParams(window.location.search);
 const slug = urlParams.get("slug");
 
-// Add this
+// Attach slug to hidden form field
 const slugField = document.getElementById("slugField");
 if (slugField && slug) {
   slugField.value = slug;
 }
 
-// Show quick name from slug
+// Show quick fallback name immediately from slug
 if (slug) {
   const quickName = slug
     .split("-")
@@ -349,19 +349,20 @@ if (slug) {
   });
 }
 
-// Load photo instantly from slug
+// Load employee photo
 const photo = document.getElementById("employeePhoto");
 if (photo && slug) {
   photo.src = `employee-photos/${slug}.jpg`;
 }
 
-// Create QR code
+// Generate QR code
 const qr = document.getElementById("employeeQR");
 if (qr && slug) {
   const url = `https://skyfordscissorhands.github.io/connect/connect-scalable.html?slug=${slug}`;
   qr.src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(url)}`;
 }
 
+// Default fallback name
 let employeeName = "Employee Name";
 
 const saveBtn = document.getElementById("saveEmployee");
@@ -371,6 +372,7 @@ const formEl = document.getElementById("connectForm");
 // Disable button until employee loads
 saveBtn.disabled = true;
 
+// Load employee data from employees.js
 function loadEmployee() {
   if (!slug) return;
 
@@ -387,6 +389,7 @@ function loadEmployee() {
 loadEmployee();
 loadEmployeeExtras();
 
+// Load extra data (name + subject)
 async function loadEmployeeExtras() {
   if (!slug) return;
 
@@ -410,25 +413,43 @@ async function loadEmployeeExtras() {
   }
 }
 
-// ✅ STEP 1 (FIXED)
+
+// ===============================
+// STEP 1 — Save Contact
+// Around line ~410–440
+// ===============================
 saveBtn.addEventListener("click", () => {
 
   const employee = employees[slug];
+  if (!employee) return;
+
   const fullName = employee.name.split(" ");
   const first = fullName[0] || "";
-  const last = fullName[1] || "";
+  const last = fullName.slice(1).join(" ") || "";
 
   const phone = document.getElementById("employeePhone").textContent;
   const email = document.getElementById("employeeEmail").textContent;
 
-  const vcfLink = `/vcf.html?first=${first}&last=${last}&phone=${phone}&email=${email}`;
+  // ✅ REAL VCF FILE (this fixes your issue)
+  const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:${last};${first};;;
+FN:${employee.name}
+TEL;TYPE=CELL:${phone}
+EMAIL;TYPE=INTERNET:${email}
+END:VCARD`;
+
+  const blob = new Blob([vcard], { type: "text/vcard" });
+  const fileUrl = URL.createObjectURL(blob);
 
   const link = document.createElement("a");
-  link.href = vcfLink;
-  link.download = "";
+  link.href = fileUrl;
+  link.download = `${first}-${last}.vcf`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+
+  URL.revokeObjectURL(fileUrl);
 
   // Show confirmation
   shareStep.innerHTML = `
@@ -443,16 +464,21 @@ saveBtn.addEventListener("click", () => {
     </div>
   `;
 
+  // Transition to form
   setTimeout(() => {
     shareStep.style.display = "none";
     formEl.style.display = "flex";
   }, 2500);
 
-}); // 🔥 THIS WAS MISSING
+});
 
-// ✅ STEP 2 (NOW OUTSIDE STEP 1)
+
+// ===============================
+// STEP 2 — Submit Form
+// ===============================
 formEl.addEventListener("submit", (e) => {
   e.preventDefault();
+
   const formData = new FormData(formEl);
 
   fetch(formEl.action, {
@@ -466,6 +492,7 @@ formEl.addEventListener("submit", (e) => {
         <h2>Thanks for connecting!</h2>
         <p>Your info has been sent to ${employeeName}.</p>
       </div>`;
+
     setTimeout(() => {
       window.location.href = "https://associated-industries.com/";
     }, 2000);
@@ -475,7 +502,10 @@ formEl.addEventListener("submit", (e) => {
   });
 });
 
-// Skip button
+
+// ===============================
+// OPTIONAL — Skip Button
+// ===============================
 const skipBtn = document.getElementById("skipForm");
 if (skipBtn) {
   skipBtn.addEventListener("click", (e) => {
