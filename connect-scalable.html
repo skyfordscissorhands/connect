@@ -435,6 +435,8 @@ saveBtn.addEventListener("click", () => {
 VERSION:3.0
 N:${last};${first};;;
 FN:${employee.name}
+ORG:${employee.company || ""}
+TITLE:${employee.title || ""}
 TEL;TYPE=CELL:${phone}
 EMAIL;TYPE=INTERNET:${email}
 END:VCARD`;
