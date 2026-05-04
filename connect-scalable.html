@@ -324,8 +324,8 @@
  </main>
 
 <script src="employees.js"></script>
-  
- <script>
+
+<script>
 
 // Get slug from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -354,17 +354,15 @@ const photo = document.getElementById("employeePhoto");
 if (photo && slug) {
   photo.src = `employee-photos/${slug}.jpg`;
 }
-   
-// Create QR code for this employee page
-const qr = document.getElementById("employeeQR");
 
+// Create QR code
+const qr = document.getElementById("employeeQR");
 if (qr && slug) {
   const url = `https://skyfordscissorhands.github.io/connect/connect-scalable.html?slug=${slug}`;
   qr.src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(url)}`;
-}   
+}
 
 let employeeName = "Employee Name";
-let vcfFile = "default-employee.vcf";
 
 const saveBtn = document.getElementById("saveEmployee");
 const shareStep = document.getElementById("shareStep");
@@ -388,8 +386,8 @@ function loadEmployee() {
 
 loadEmployee();
 loadEmployeeExtras();
-   
-  async function loadEmployeeExtras() {
+
+async function loadEmployeeExtras() {
   if (!slug) return;
 
   try {
@@ -397,14 +395,11 @@ loadEmployeeExtras();
     const data = await res.json();
 
     employeeName = data.full_name || employeeName;
-    vcfFile = data.vcf_download_link || vcfFile;
 
-    // Update name everywhere
     document.querySelectorAll(".employee-name, .employee-button-name").forEach(el => {
       el.textContent = employeeName;
     });
 
-    // Update subject line
     const subjectField = document.getElementById("subjectField");
     if (subjectField) {
       subjectField.value = `New contact for ${employeeName}`;
@@ -414,49 +409,48 @@ loadEmployeeExtras();
     console.log("Extras failed to load", err);
   }
 }
-// Step 1 → Generate VCF → Reveal form
+
+// ✅ STEP 1 (FIXED)
 saveBtn.addEventListener("click", () => {
 
-  // Get full name from employees.js (reliable)
-const employee = employees[slug];
-const fullName = employee.name.split(" ");
-const first = fullName[0] || "";
-const last = fullName[1] || "";
+  const employee = employees[slug];
+  const fullName = employee.name.split(" ");
+  const first = fullName[0] || "";
+  const last = fullName[1] || "";
 
-  // Get contact info from page
   const phone = document.getElementById("employeePhone").textContent;
   const email = document.getElementById("employeeEmail").textContent;
 
-  // Build dynamic VCF link
   const vcfLink = `/vcf.html?first=${first}&last=${last}&phone=${phone}&email=${email}`;
-  
-  // Trigger download without leaving page
-const link = document.createElement("a");
-link.href = vcfLink;
-link.download = "";
-document.body.appendChild(link);
-link.click();
-document.body.removeChild(link);
+
+  const link = document.createElement("a");
+  link.href = vcfLink;
+  link.download = "";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 
   // Show confirmation
-shareStep.innerHTML = `
-  <div style="text-align:center; padding:40px 20px;">
-    <h2 style="color:#0073E5;">Contact Saved</h2>
-    <p style="margin-top:10px;">
-      ${employeeName}'s info is now in your phone.
-    </p>
-    <p style="font-size:13px; opacity:.7; margin-top:8px;">
-      Want them to have yours too?
-    </p>
-  </div>
-`;
+  shareStep.innerHTML = `
+    <div style="text-align:center; padding:40px 20px;">
+      <h2 style="color:#0073E5;">Contact Saved</h2>
+      <p style="margin-top:10px;">
+        ${employeeName}'s info is now in your phone.
+      </p>
+      <p style="font-size:13px; opacity:.7; margin-top:8px;">
+        Want them to have yours too?
+      </p>
+    </div>
+  `;
 
-setTimeout(() => {
-  shareStep.style.display = "none";
-  formEl.style.display = "flex";
-}, 2500);
+  setTimeout(() => {
+    shareStep.style.display = "none";
+    formEl.style.display = "flex";
+  }, 2500);
 
-// Step 2 → Submit form → Show thank-you → Redirect
+}); // 🔥 THIS WAS MISSING
+
+// ✅ STEP 2 (NOW OUTSIDE STEP 1)
 formEl.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(formEl);
@@ -481,19 +475,15 @@ formEl.addEventListener("submit", (e) => {
   });
 });
 
-// Skip Button (Optional Step)
-
+// Skip button
 const skipBtn = document.getElementById("skipForm");
-
 if (skipBtn) {
   skipBtn.addEventListener("click", (e) => {
     e.preventDefault();
-
-    // Redirect user if they choose to skip
     window.location.href = "https://associated-industries.com/";
   });
-}   
-   
+}
+
 </script>
 </body>
 </html>
