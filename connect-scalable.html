@@ -427,7 +427,8 @@ saveBtn.addEventListener("click", () => {
   const email = document.getElementById("employeeEmail").textContent;
 
   // Build dynamic VCF link
-  const vcfLink = `/connect/vcf.html?first=${first}&last=${last}&phone=${phone}&email=${email}`;
+  const vcfLink = `/vcf.html?first=${first}&last=${last}&phone=${phone}&email=${email}`;
+  
   // Trigger download
   window.location.href = vcfLink;
 
