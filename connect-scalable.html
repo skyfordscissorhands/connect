@@ -438,23 +438,20 @@ document.body.appendChild(link);
 link.click();
 document.body.removeChild(link);
 
-  // Show confirmation
-  shareStep.innerHTML = `
-    <div style="text-align:center; padding:40px 20px;">
-      <h2 style="color:#0073E5;">Contact Saved</h2>
-      <p style="margin-top:10px;">
-        ${employeeName}'s info is now in your phone.
-      </p>
-      <p style="font-size:13px; opacity:.7; margin-top:8px;">
-        Want them to have yours too?
-      </p>
-    </div>
-  `;
+  // Show confirmation + wait for user
+shareStep.innerHTML = `
+  <div style="text-align:center; padding:40px 20px;">
+    <h2 style="color:#0073E5;">Add Contact</h2>
+    <p style="margin-top:10px;">
+      Save ${employee.name}'s info to your phone.
+    </p>
+    <button id="continueBtn" style="margin-top:20px;">Continue</button>
+  </div>
+`;
 
-  setTimeout(() => {
-    shareStep.style.display = "none";
-    formEl.style.display = "flex";
-  }, 2500);
+document.getElementById("continueBtn").addEventListener("click", () => {
+  shareStep.style.display = "none";
+  formEl.style.display = "flex";
 });
 
 // Step 2 → Submit form → Show thank-you → Redirect
