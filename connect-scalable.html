@@ -437,6 +437,7 @@ N:${last};${first};;;
 FN:${employee.name}
 ORG:${employee.company || ""}
 TITLE:${employee.title || ""}
+NOTE:${employee.title || ""} | ${employee.company || ""}
 TEL;TYPE=CELL:${phone}
 EMAIL;TYPE=INTERNET:${email}
 PHOTO;VALUE=URI:https://connect.associated-industries.com/AI-icon.png
