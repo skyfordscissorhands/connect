@@ -417,10 +417,11 @@ loadEmployeeExtras();
 // Step 1 → Generate VCF → Reveal form
 saveBtn.addEventListener("click", () => {
 
-  // Get full name and split it
-  const fullName = employeeName.split(" ");
-  const first = fullName[0] || "";
-  const last = fullName[1] || "";
+  // Get full name from employees.js (reliable)
+const employee = employees[slug];
+const fullName = employee.name.split(" ");
+const first = fullName[0] || "";
+const last = fullName[1] || "";
 
   // Get contact info from page
   const phone = document.getElementById("employeePhone").textContent;
