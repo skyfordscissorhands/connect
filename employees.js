@@ -306,7 +306,7 @@ const employees = {
     title: "Communications Coordinator",
     company: "StanTech",
     email: "rhiannon.poolaw@stantechservices.com",
-    phone: "(580) 771-6020"
+    phone: "(572) 268-8087"
   },
   "rick-sims": {
     name: "Rick Sims",
