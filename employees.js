@@ -50,13 +50,6 @@ const employees = {
     email: "wes@aei-corp.com",
     phone: "(405) 306-8481"
   },
-  "jenny-gowens": {
-    name: "Jenny Gowens",
-    title: "",
-    company: "AEI",
-    email: "jenny@aei-corp.com",
-    phone: "(405) 740-2055"
-  },
   "bill-graham": {
     name: "Bill Graham",
     title: "",
@@ -130,13 +123,6 @@ const employees = {
     company: "Equus",
     email: "julie.czech@equusenv.com",
     phone: "(918) 519-2990"
-  },
-  "sally-douglass": {
-    name: "Sally Douglass",
-    title: "",
-    company: "Equus",
-    email: "sally.douglass@equusenv.com",
-    phone: "(918) 409-3922"
   },
   "eric-farrar": {
     name: "Eric Farrar",
@@ -217,20 +203,6 @@ const employees = {
     email: "robert.andersen@stantechservices.com",
     phone: "(405) 831-8425"
   },
-  "alisha-booth": {
-    name: "Alisha Booth",
-    title: "",
-    company: "StanTech",
-    email: "alisha.booth@stantechservices.com",
-    phone: "(405) 727-0715"
-  },
-  "makayla-combs": {
-    name: "Makayla Combs",
-    title: "Environmental Technician",
-    company: "StanTech",
-    email: "makaylayoung@stantechservices.com",
-    phone: "(405) 953-4710"
-  },
   "isaac-dale": {
     name: "Isaac Dale",
     title: "Geologist",
@@ -287,13 +259,6 @@ const employees = {
     email: "rlopez@stantechservices.com",
     phone: "(405) 669-8457"
   },
-  "zoie-nelson": {
-    name: "Zoie Nelson",
-    title: "Public Relations",
-    company: "StanTech",
-    email: "zoie.nelson@stantechservices.com",
-    phone: "(405) 802-7799"
-  },
   "billy-nievar": {
     name: "Billy Nievar",
     title: "Engineer",
@@ -307,6 +272,34 @@ const employees = {
     company: "StanTech",
     email: "rhiannon.poolaw@stantechservices.com",
     phone: "(572) 268-8087"
+      },
+  "kyler-young": {
+    name: "Kyler Young",
+    title: "Environmental Technician",
+    company: "StanTech",
+    email: "kyler.young@stantechservices.com",
+    phone: "(405) 595-6725"
+  },
+  "trevor-reynolds": {
+    name: "Trevor Reynolds",
+    title: "Environmental Technician",
+    company: "StanTech",
+    email: "trevor.reynolds@stantechservices.com",
+    phone: "(405) 613-3918"
+  },
+  "ryan-totten": {
+    name: "Ryan Totten",
+    title: "Environmental Technician",
+    company: "StanTech",
+    email: "ryan.totten@stantechservices.com",
+    phone: "(405) 953-4710"
+  },
+  "julie-dickson": {
+    name: "Julie Dickson",
+    title: "Executive Assistant/Event Coordinator",
+    company: "StanTech",
+    email: "julie.dickson@stantechservices.com",
+    phone: "(405) 788-8115"
   },
   "rick-sims": {
     name: "Rick Sims",
