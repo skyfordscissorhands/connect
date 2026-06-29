@@ -247,7 +247,7 @@ const employees = {
   },
   "jerry-hansen": {
     name: "Jerry Hansen",
-    title: "Environmental Technician",
+    title: "Health & Safety Manager",
     company: "StanTech",
     email: "jhansen@stantechservices.com",
     phone: "(405) 205-2567"
