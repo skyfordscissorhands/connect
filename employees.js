@@ -15,6 +15,20 @@ const employees = {
     email: "tricia@aei-corp.com",
     phone: "(405) 401-8836"
   },
+    "matt-warden": {
+    name: "Matt Warden",
+    title: "",
+    company: "AEI",
+    email: "matt@aei-corp.com",
+    phone: "(405) 642-6088"
+  },
+  "jenny.lorrah": {
+    name: "Jenny Lorrah",
+    title: "Executive Assistant",
+    company: "AEI",
+    email: "jenny@aei-corp.com",
+    phone: "(405) 410-4447"
+  },
   "chuck-clark": {
     name: "Chuck Clark",
     title: "",
