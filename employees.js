@@ -124,6 +124,20 @@ const employees = {
     email: "julie.czech@equusenv.com",
     phone: "(918) 519-2990"
   },
+     "emily-watkinson": {
+    name: "Emily Watkinson",
+    title: "Executive Assistant",
+    company: "Equus",
+    email: "emily.watkinson@equusenv.com",
+    phone: "(918) 984-5553"
+  },
+ "nicholas-basore": {
+    name: "Nicholas Basore",
+    title: "Hydrogeologist II",
+    company: "Equus",
+    email: "nick.basore@equusenv.com",
+    phone: "(918) 933-1352"
+  },
   "eric-farrar": {
     name: "Eric Farrar",
     title: "",
