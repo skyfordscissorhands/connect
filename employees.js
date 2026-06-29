@@ -247,7 +247,7 @@ const employees = {
   },
   "michael-ekiss": {
     name: "Michael Ekiss",
-    title: "ORBCA Team Leader",
+    title: "Sr. Project Manager",
     company: "StanTech",
     email: "mekiss@stantechservices.com",
     phone: "(405) 845-4998"
