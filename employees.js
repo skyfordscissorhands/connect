@@ -113,7 +113,7 @@ const employees = {
     title: "",
     company: "Ecovac",
     email: "corey.walden@ecovacservices.com",
-    phone: "(405) 795-7331"
+    phone: "(405) 593-4025"
   },
   "darrin-winkler": {
     name: "Darrin Winkler",
