@@ -145,7 +145,7 @@ const employees = {
     email: "emily.watkinson@equusenv.com",
     phone: "(918) 984-5553"
   },
- "nicholas-basore": {
+ "nick-basore": {
     name: "Nicholas Basore",
     title: "Hydrogeologist II",
     company: "Equus",
