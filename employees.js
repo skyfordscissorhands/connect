@@ -22,7 +22,7 @@ const employees = {
     email: "matt@aei-corp.com",
     phone: "(405) 642-6088"
   },
-  "jenny.lorrah": {
+  "jenny-lorrah": {
     name: "Jenny Lorrah",
     title: "Executive Assistant",
     company: "AEI",
