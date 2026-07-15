@@ -21,7 +21,6 @@ const employees = {
   company: "AEI",
   email: "matt@aei-corp.com",
   phone: "(405) 642-6088"
-},
   },
   "jenny-lorrah": {
     name: "Jenny Lorrah",
