@@ -317,7 +317,7 @@ const employees = {
   },
   "ryan-totten": {
     name: "Ryan Totten",
-    title: "Environmental Technician",
+    title: "Geologist",
     company: "StanTech",
     email: "ryan.totten@stantechservices.com",
     phone: "(405) 953-4710"
